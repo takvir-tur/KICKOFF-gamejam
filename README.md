@@ -4,6 +4,20 @@ Instead of taking "Kickoff" literally as a sports term, this game treats it as t
 
 ---
 
+## 📊 Status Snapshot
+
+> Update this block as you go — it's the fastest way for any teammate to see where things stand without reading the whole doc. Check items off directly on GitHub (they render as clickable boxes) or in your editor.
+
+**Current day:** Day _\_\__ · **Last updated by:** _\_\_\__ on _\_\_\__
+
+- [ ] Day 0 Joint Setup complete
+- [ ] Day 1 deliverables complete
+- [ ] Day 2 Integration Checkpoint 1 passed
+- [ ] Day 3 Integration Checkpoint 2 passed
+- [ ] Day 4 build exported
+
+---
+
 ## 🎮 Game Concept & Mechanics
 
 ### The Core Loop
@@ -61,6 +75,12 @@ Go to **Project → Project Settings → Input Map** and register these exact ac
 
 Add `scripts/game_manager.gd` as an **Autoload** named `GameManager` in Project Settings. This script handles level transitions and global state.
 
+### ✅ Day 0 Checklist
+
+- [ ] Folder layout created
+- [ ] `move_left` / `move_right` / `jump` / `kickoff_dash` bound in Input Map
+- [ ] `game_manager.gd` added as Autoload named `GameManager`
+
 ---
 
 ## 👥 3-Person Orchestrated Task Distribution
@@ -91,10 +111,11 @@ Add `scripts/game_manager.gd` as an **Autoload** named `GameManager` in Project 
 - `Camera2D` (with `camera_follow.gd` attached)
 
 **Key Tasks:**
-- Implement basic walk, jump, and gravity loop in `player.gd`.
-- Hook up the `kickoff_dash` logic. Ensure it disables `has_kickoff` and flips the `is_dashing` boolean state.
-- Emit the signals `kickoff_ready_changed(bool)` and `dashed` when the kickoff is executed. (Person 3 needs these!)
-- Add the player node to a node group called `"player"` so obstacles can identify it.
+- [ ] Basic walk, jump, and gravity loop in `player.gd`
+- [ ] `kickoff_dash` logic wired up — disables `has_kickoff`, flips `is_dashing`
+- [ ] Emits `kickoff_ready_changed(bool)` and `dashed` signals on kickoff (Person 3 depends on these)
+- [ ] Player node added to the `"player"` group
+- [ ] `camera_follow.gd` attached to Camera2D and added to `"camera"` group
 
 ### 🧱 Person 2: Levels, Obstacles, & Level Design
 
@@ -103,17 +124,24 @@ Add `scripts/game_manager.gd` as an **Autoload** named `GameManager` in Project 
 - Levels 1 through 5
 
 **Key Tasks:**
-- Study `obstacle_base.gd`. All other hazard scripts should inherit from it (`extends ObstacleBase`).
-- Override `_on_dash_hit()` (e.g., break walls, flip switches) and `_on_normal_hit()` (e.g., kill player, slide off doors) in inherited scenes.
-- Build levels sequentially:
+- [ ] All hazard scenes inherit `obstacle_base.gd` (`extends "res://scripts/obstacle_base.gd"`)
+- [ ] `_on_dash_hit()` / `_on_normal_hit()` overridden per obstacle
+- [ ] `BreakableWall.tscn` built (StaticBody2D solid child + Sprite2D)
+- [ ] `Spike.tscn` built
+- [ ] `Switch.tscn` + `Door.tscn` built and wired via `target_door_path`
+- [ ] `MovingPlatform.tscn` built
 
-| Level | Focus | Design |
-|---|---|---|
-| 1 | Intro | Simple movement, single gap requiring the Kickoff dash |
-| 2 | Wall breaking | `BreakableWall` right in front of the goal |
-| 3 | Precision | Jump over a pit, dash mid-air over a field of spikes |
-| 4 | Switch & Door puzzle | Dash to trigger a distant switch that opens the path before you fall |
-| 5 | The Final Gauntlet | Mix everything together |
+**Level Build Checklist:**
+
+| Level | Focus | Built | Playtested |
+|---|---|---|---|
+| 1 | Intro — single gap, forces the Kickoff | ☐ | ☐ |
+| 2 | Wall breaking — `BreakableWall` guards the goal | ☐ | ☐ |
+| 3 | Precision — dash mid-air over a spike field | ☐ | ☐ |
+| 4 | Switch & Door — dash-triggered switch opens the path before a fall | ☐ | ☐ |
+| 5 | Gauntlet — combines everything | ☐ | ☐ |
+
+> Table cells can't be clicked on GitHub — use the task-list items above (or a commit/PR note) for anything you want live progress tracking on.
 
 ### 🎛️ Person 3: UI, Goal, Audio, & Game States
 
@@ -123,22 +151,41 @@ Add `scripts/game_manager.gd` as an **Autoload** named `GameManager` in Project 
 - `MainMenu.tscn`, `PauseMenu.tscn`, `VictoryScreen.tscn`
 
 **Key Tasks:**
-- Make sure `Goal.tscn` correctly calls `GameManager.complete_level()` upon player collision.
-- Implement the timer and HUD UI using `kickoff_ui.gd`. Connect the Player's `kickoff_ready_changed` signal to visual changes on the UI (like turning a UI icon gray when spent).
-- Assemble SFX assets (jump, dash, wall break, victory, death) and write a simple audio manager or trigger them via code.
+- [ ] `Goal.tscn` calls `GameManager.complete_level()` on player collision
+- [ ] Timer + HUD implemented in `kickoff_ui.gd`
+- [ ] Player's `kickoff_ready_changed` signal connected to the UI icon
+- [ ] `MainMenu.tscn` built
+- [ ] `PauseMenu.tscn` built
+- [ ] `VictoryScreen.tscn` built
+- [ ] SFX assembled (jump, dash, wall break, victory, death) and triggered via code
 
 ---
 
 ## 📅 4-Day Beginner Survival Roadmap
 
-To complete this game in 4 days without burning out, stick strictly to this timeline:
+To complete this game in 4 days without burning out, stick strictly to this timeline. Check items off as your team clears them.
 
-| Day | Goal | Deliverable Checklist |
-|---|---|---|
-| **Day 1** | Core Sandbox | ☐ Step 0 Joint Setup complete<br>☐ Person 1 delivers a walking/jumping Player<br>☐ Person 2 sets up basic Spike and Breakable Wall scenes<br>☐ Person 3 finishes basic UI layout |
-| **Day 2** | First Playable | ☐ Integration Checkpoint 1: merge Player, Obstacles, and UI<br>☐ Smoke test: can the player jump, dash through a wall, and trigger UI?<br>☐ Person 2 builds Level 1 & 2 |
-| **Day 3** | Content Complete | ☐ Integration Checkpoint 2: complete Levels 3 & 4<br>☐ Person 3 connects Goal, Menus, Game Over, and Level Transition states<br>☐ Implement SFX and simple background tracks |
-| **Day 4** | Polish & Publish | ☐ Design Level 5 (The Gauntlet)<br>☐ Fine-tune the physics: adjust `dash_gravity_scale` in the Inspector to feel natural<br>☐ Export templates and test the Web/Windows builds |
+### Day 1 — Core Sandbox
+- [ ] Step 0 Joint Setup complete
+- [ ] Person 1 delivers a walking/jumping Player
+- [ ] Person 2 sets up basic Spike and Breakable Wall scenes
+- [ ] Person 3 finishes basic UI layout
+
+### Day 2 — First Playable
+- [ ] **Integration Checkpoint 1:** Player, Obstacles, and UI merged
+- [ ] Smoke test passes: player can jump, dash through a wall, and trigger UI
+- [ ] Person 2 builds Level 1 & 2
+
+### Day 3 — Content Complete
+- [ ] **Integration Checkpoint 2:** Levels 3 & 4 complete
+- [ ] Person 3 connects Goal, Menus, Game Over, and Level Transition states
+- [ ] SFX and simple background tracks implemented
+
+### Day 4 — Polish & Publish
+- [ ] Level 5 (The Gauntlet) designed
+- [ ] Physics fine-tuned — `dash_gravity_scale` adjusted in the Inspector to feel natural
+- [ ] Export templates configured
+- [ ] Web/Windows builds tested
 
 ---
 
@@ -160,3 +207,4 @@ Stick to a restrictive, high-contrast palette to keep the game visually striking
 - **Always pull before pushing** — coordinate with your team on Discord/GitHub before pushing to `main`.
 - **Keep testing localized** — Person 2 can test obstacles using a dummy node with an `is_dashing = true` property before Person 1 even finishes the player script.
 - **Don't touch placeholder code early** — the `TODO` blocks inside the scripts are deliberately left bare. Get the mechanical physics working perfectly first; add fancy particles, screen-shake, and sound effects only after Day 2's Integration Checkpoint is fully green!
+- **Keep this README's checklists current** — tick boxes off in the same commit/PR that completes the work, so the Status Snapshot at the top always reflects reality.
