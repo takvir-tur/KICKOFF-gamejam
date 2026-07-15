@@ -1,7 +1,5 @@
 # 🥷 Kickoff: Lies_in_Shadow
 
-*A fast-paced, high-momentum 2D ninja platformer built in Godot (GDScript) for a 4-day Game Jam.*
-
 Instead of taking "Kickoff" literally as a sports term, this game treats it as the ignition of momentum. Every level begins with one decisive, powerful, physics-defying dash: **The Shadow Burst**. Your survival depends entirely on one question: *When do I kickoff my run?*
 
 ---
