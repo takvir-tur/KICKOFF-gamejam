@@ -1,4 +1,4 @@
-# 🥷 Kickoff: Shadow Burst
+# 🥷 Kickoff: Lies_in_Shadow
 
 *A fast-paced, high-momentum 2D ninja platformer built in Godot (GDScript) for a 4-day Game Jam.*
 
