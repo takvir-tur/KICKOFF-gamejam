@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgjeeobjhet33"
-path="res://.godot/imported/Tile_29.png-260dc47d30f3ed6515447c9bb270b433.ctex"
+uid="uid://61h2ph6m7h0u"
+path="res://.godot/imported/Logo.svg-806d88bbb8a4edd10020abcb58d0a43f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tilemap/1 Tiles/Tile_29.png"
-dest_files=["res://.godot/imported/Tile_29.png-260dc47d30f3ed6515447c9bb270b433.ctex"]
+source_file="res://assets/Icons/Logo/Logo.svg"
+dest_files=["res://.godot/imported/Logo.svg-806d88bbb8a4edd10020abcb58d0a43f.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
