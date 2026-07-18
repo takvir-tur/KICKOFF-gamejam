@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dw1wkinrpigl3"]
+[gd_scene load_steps=46 format=3 uid="uid://dw1wkinrpigl3"]
 
 [ext_resource type="Texture2D" uid="uid://dfnrfb0fkiv8n" path="res://assets/Samurai/Idle.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bqvj45jqm442i" path="res://scripts/player.gd" id="1_g2els"]
@@ -182,7 +182,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t4otl")
 }],
-"loop": 1,
+"loop": true,
 "name": &"dash",
 "speed": 10.0
 }, {
@@ -196,7 +196,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wqfne")
 }],
-"loop": 1,
+"loop": true,
 "name": &"death",
 "speed": 6.0
 }, {
@@ -219,7 +219,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fjrip")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -260,7 +260,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4r5pv")
 }],
-"loop": 1,
+"loop": true,
 "name": &"jump",
 "speed": 15.0
 }, {
@@ -289,7 +289,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
 }],
-"loop": 1,
+"loop": true,
 "name": &"run",
 "speed": 12.0
 }]
@@ -298,20 +298,20 @@ animations = [{
 radius = 4.0
 height = 24.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1744938620]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1530101629]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 3
-position = Vector2(1.7500014, -22.749998)
-scale = Vector2(0.32421878, 0.33203122)
+position = Vector2(1.75, -22.75)
+scale = Vector2(0.324219, 0.332031)
 sprite_frames = SubResource("SpriteFrames_smehm")
 animation = &"jump"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1033641618]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -14)
 shape = SubResource("CapsuleShape2D_ur7pv")
 
-[node name="TrailTimer" type="Timer" parent="." unique_id=2064588322]
+[node name="TrailTimer" type="Timer" parent="."]
 wait_time = 0.5
