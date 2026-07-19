@@ -156,9 +156,9 @@ extends CharacterBody2D
 #   move_left, move_right, jump, kickoff_dash (bind kickoff_dash to Shift)
 # ============================================================
 
-@export var speed: float = 220.0
-@export var jump_velocity: float = -600.0
-@export var gravity: float = 1800.0
+@export var speed: float = 200.0
+@export var jump_velocity: float = -300.0
+@export var gravity: float = 1200.0
 
 @export var dash_speed: float = 900.0
 @export var dash_time: float = 0.2
