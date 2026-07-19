@@ -167,6 +167,14 @@ extends CharacterBody2D
 @export var max_jumps: int = 2
 var jumps_left: int = max_jumps
 
+@export var max_stamina: float = 100.0
+var current_stamina: float = max_stamina
+@export var stamina_regen_rate: float = 40.0 # How fast it refills per second
+@export var dash_cost: float = 50.0
+@export var jump_cost: float = 25.0
+
+signal stamina_changed(current_value: float, max_value: float)
+
 var has_kickoff: bool = true
 var is_dashing: bool = false
 var is_invincible: bool = false
@@ -201,6 +209,11 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if not is_dashing and current_stamina < max_stamina:
+		# move_toward smoothly increases the value without going over the max
+		current_stamina = move_toward(current_stamina, max_stamina, stamina_regen_rate * delta)
+		stamina_changed.emit(current_stamina, max_stamina)
+		
 	if is_dashing:
 		_process_dash(delta)
 	else:
@@ -225,11 +238,21 @@ func _process_normal_movement(delta: float) -> void:
 	velocity.x = input_dir * speed
 
 	if Input.is_action_just_pressed("jump") and jumps_left > 0:
-		velocity.y = jump_velocity
-		jumps_left -= 1 # Subtract a jump each time
+		if current_stamina >= jump_cost:
+			current_stamina -= jump_cost
+			velocity.y = jump_velocity
+			jumps_left -= 1
+			stamina_changed.emit(current_stamina, max_stamina)
+		else:
+			print("Not enough stamina to jump!") # Optional debug print
 
 	if Input.is_action_just_pressed("kickoff_dash") and has_kickoff:
-		_start_dash()
+		if current_stamina >= dash_cost:
+			current_stamina -= dash_cost
+			stamina_changed.emit(current_stamina, max_stamina)
+			_start_dash()
+		else:
+			print("Not enough stamina to dash!")
 
 
 func _start_dash() -> void:
