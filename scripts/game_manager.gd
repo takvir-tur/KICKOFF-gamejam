@@ -12,10 +12,9 @@ extends Node
 # ============================================================
 
 var level_scenes: Array[String] = [
-	"res://scenes/levels/level_1.tscn",
-	"res://scenes/levels/level_2.tscn",
-	"res://scenes/levels/level_3.tscn",
-	"res://scenes/levels/level_4.tscn",
+	"res://scenes/Levels/level01.tscn",
+	"res://scenes/Levels/level02.tscn",
+	"res://scenes/Levels/level03.tscn",
 ]
 
 var current_level_index: int = 0
@@ -26,7 +25,10 @@ var best_times: Dictionary = {}
 func start_level(index: int) -> void:
 	current_level_index = index
 	level_start_time = Time.get_ticks_msec() / 1000.0
-	get_tree().change_scene_to_file(level_scenes[index])
+	if has_node("/root/SceneTransition"):
+		SceneTransition.transition_to(level_scenes[index])
+	else:
+		get_tree().change_scene_to_file(level_scenes[index])
 
 
 func complete_level() -> void:
@@ -37,7 +39,11 @@ func complete_level() -> void:
 	if current_level_index + 1 < level_scenes.size():
 		start_level(current_level_index + 1)
 	else:
-		get_tree().change_scene_to_file("res://scenes/ui/victory_screen.tscn")
+		# All levels complete — return to main menu for now
+		if has_node("/root/SceneTransition"):
+			SceneTransition.transition_to("res://scenes/main_menu.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 func restart_level() -> void:

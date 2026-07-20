@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://0sdw1ucgch1q"]
+[gd_scene load_steps=53 format=3 uid="uid://0sdw1ucgch1q"]
 
 [ext_resource type="Script" uid="uid://dq7uuoekbd0ye" path="res://scripts/boss.gd" id="1_2cdgk"]
 [ext_resource type="Texture2D" uid="uid://o6bhoy6itnqv" path="res://assets/Enemies/lvl_1/Sprites/Attack1.png" id="1_wqpjq"]
@@ -337,35 +337,37 @@ height = 44.0
 radius = 32.0
 height = 98.0
 
-[node name="Boss" type="CharacterBody2D" unique_id=421470088]
+[node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_2cdgk")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=666727497]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.50001, -2)
+scale = Vector2(0.895, 0.93)
 sprite_frames = SubResource("SpriteFrames_ft6lg")
 animation = &"take_hit"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=29414890]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_qsl3t")
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=528622619]
+[node name="Hurtbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=549461537]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_2avx2")
 
-[node name="Hitbox" type="Area2D" parent="." unique_id=476927492]
+[node name="Hitbox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=11157231]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(45, -12)
-rotation = 1.5707964
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5f346")
 disabled = true
 
-[node name="LedgeCheck" type="RayCast2D" parent="." unique_id=1393936753]
+[node name="LedgeCheck" type="RayCast2D" parent="."]
 target_position = Vector2(30, 30)
 
-[node name="LandingCheck" type="RayCast2D" parent="." unique_id=1577355322]
+[node name="LandingCheck" type="RayCast2D" parent="."]
 position = Vector2(120, 0)
 target_position = Vector2(0, 30)

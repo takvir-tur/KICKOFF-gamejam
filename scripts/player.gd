@@ -40,6 +40,11 @@ var is_attacking: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var trail_timer: Timer = $TrailTimer
+
+# --- AUDIO ---
+var attack_sfx: AudioStreamPlayer
+var dash_sfx: AudioStreamPlayer
+var jump_sfx: AudioStreamPlayer
 @onready var sword_collision: CollisionShape2D = $SwordHitbox/CollisionShape2D
 
 # UI Signals
@@ -67,6 +72,22 @@ func _ready() -> void:
 	kickoff_ready_changed.emit(has_kickoff)
 	trail_timer.timeout.connect(_on_trail_timer_timeout)
 	sprite.animation_finished.connect(_on_animation_finished)
+	
+	# --- Create audio players ---
+	attack_sfx = AudioStreamPlayer.new()
+	attack_sfx.stream = load("res://assets/Sounds/Attack/Sword Attack 1.wav")
+	attack_sfx.volume_db = -5.0
+	add_child(attack_sfx)
+	
+	dash_sfx = AudioStreamPlayer.new()
+	dash_sfx.stream = load("res://assets/Sounds/Walk_run_jump/15_human_dash_1.wav")
+	dash_sfx.volume_db = -5.0
+	add_child(dash_sfx)
+	
+	jump_sfx = AudioStreamPlayer.new()
+	jump_sfx.stream = load("res://assets/Sounds/Walk_run_jump/Stone Jump.wav")
+	jump_sfx.volume_db = -8.0
+	add_child(jump_sfx)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -108,6 +129,8 @@ func _process_normal_movement(delta: float) -> void:
 			velocity.y = jump_velocity
 			jumps_left -= 1
 			stamina_changed.emit(current_stamina, max_stamina)
+			if jump_sfx:
+				jump_sfx.play()
 		else:
 			print("Not enough stamina to jump!") 
 
@@ -183,6 +206,8 @@ func _start_dash(accuracy: float) -> void:
 	kickoff_ready_changed.emit(has_kickoff)
 	dashed.emit()
 	get_tree().call_group("camera", "shake")
+	if dash_sfx:
+		dash_sfx.play()
 
 func _process_dash(delta: float) -> void:
 	velocity.y += gravity * _active_dash_gravity * delta
@@ -241,6 +266,8 @@ func _start_attack(attack_anim: String) -> void:
 	sprite.play(attack_anim)
 	# Turn the blade ON!
 	sword_collision.disabled = false
+	if attack_sfx:
+		attack_sfx.play()
 
 func _on_animation_finished() -> void:
 	if sprite.animation == "slash" or sprite.animation == "stab":
