@@ -8,4 +8,4 @@ func _on_body_entered(body: Node2D) -> void:
 	# Check if the thing that fell in is the player
 	print("Something touched the killzone: ", body.name) # Add this!
 	if body.is_in_group("player"):
-		body.take_hit()
+		body.take_hit(100)

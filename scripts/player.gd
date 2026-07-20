@@ -7,7 +7,8 @@ extends CharacterBody2D
 @export var speed: float = 200.0
 @export var jump_velocity: float = -340.0
 @export var gravity: float = 1200.0
-
+@export var max_hp: int = 100
+var current_hp: int = max_hp
 @export var dash_speed: float = 900.0
 @export var dash_time: float = 0.6
 @export var dash_gravity_scale: float = 0.8  
@@ -55,7 +56,8 @@ var is_dead: bool = false
 func _ready() -> void:
 	add_to_group("player")
 	has_kickoff = true
-	
+	$ProgressBar.max_value = max_hp
+	$ProgressBar.value = current_hp
 	# Auto-create the timer if it wasn't added in the editor
 	if trail_timer == null:
 		trail_timer = Timer.new()
@@ -210,15 +212,23 @@ func _update_animation() -> void:
 		sprite.play("idle")
 
 # --- REPLACE YOUR EXISTING take_hit() WITH THIS ---
-func take_hit() -> void:
+func take_hit(amount: int) -> void:
 	if is_invincible or is_dead:
 		return
 		
-	is_dead = true
-	set_physics_process(false) # Stops the player from continuing to fall or move
+	# 1. Subtract the damage from your current HP
+	current_hp -= amount
 	
-	# Tell the UI to pop up
-	died.emit()
+	# 2. Update the health bar to show the new HP
+	$ProgressBar.value = current_hp
+	
+	# 3. Only die if HP drops to 0 or below!
+	if current_hp <= 0:
+		is_dead = true
+		set_physics_process(false) # Stops the player from continuing to fall or move
+		
+		# Tell the UI to pop up
+		died.emit()
 
 func _on_trail_timer_timeout() -> void:
 	_spawn_trail_ghost()

@@ -1,0 +1,354 @@
+[gd_scene format=3 uid="uid://v6hu4k0gixbf"]
+
+[ext_resource type="Script" uid="uid://c481rr8whdh1s" path="res://scripts/boss_3.gd" id="1_mjbbh"]
+[ext_resource type="Texture2D" uid="uid://b8yhd57vfvjfo" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_1.png" id="2_mjbbh"]
+[ext_resource type="Texture2D" uid="uid://qi3ixahtl2af" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_2.png" id="3_1dq3s"]
+[ext_resource type="Texture2D" uid="uid://do2drmtqmjior" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_3.png" id="4_ulcwp"]
+[ext_resource type="Texture2D" uid="uid://dxtcdrir5tme6" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_4.png" id="5_qgnrv"]
+[ext_resource type="Texture2D" uid="uid://sxbwqnscni12" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_5.png" id="6_6f2dw"]
+[ext_resource type="Texture2D" uid="uid://c4tuhqj5vlry0" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_6.png" id="7_iu7fp"]
+[ext_resource type="Texture2D" uid="uid://d7bbqwpnd45a" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_7.png" id="8_q6dmc"]
+[ext_resource type="Texture2D" uid="uid://bka5n2v2bar2v" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_8.png" id="9_qgwr5"]
+[ext_resource type="Texture2D" uid="uid://h7nuxsgdenbd" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_9.png" id="10_cxyvf"]
+[ext_resource type="Texture2D" uid="uid://jleqvseog3dd" path="res://assets/Enemies/lvl_4/Individual Sprite/Attack/Bringer-of-Death_Attack_10.png" id="11_oo3ms"]
+[ext_resource type="Texture2D" uid="uid://dsjnv0ack6831" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_1.png" id="12_lpwhj"]
+[ext_resource type="Texture2D" uid="uid://bs17ax1y43eps" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_2.png" id="13_233l8"]
+[ext_resource type="Texture2D" uid="uid://ddr0n1u80qybg" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_3.png" id="14_d2bep"]
+[ext_resource type="Texture2D" uid="uid://byvdyydfj5mj7" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_4.png" id="15_wv15o"]
+[ext_resource type="Texture2D" uid="uid://bnhshclkrmpje" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_5.png" id="16_h5d7c"]
+[ext_resource type="Texture2D" uid="uid://dv05cnofuisjy" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_6.png" id="17_ufugp"]
+[ext_resource type="Texture2D" uid="uid://cygehmvd7mae3" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_7.png" id="18_hxl3d"]
+[ext_resource type="Texture2D" uid="uid://dn0pudqs52j45" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_8.png" id="19_0nnpj"]
+[ext_resource type="Texture2D" uid="uid://bacm3wlprgsmq" path="res://assets/Enemies/lvl_4/Individual Sprite/Cast/Bringer-of-Death_Cast_9.png" id="20_tyobo"]
+[ext_resource type="Texture2D" uid="uid://cykiggf1hy8ah" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_1.png" id="21_t15rd"]
+[ext_resource type="Texture2D" uid="uid://c1j402thl0vrw" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_2.png" id="22_wn1b3"]
+[ext_resource type="Texture2D" uid="uid://dg515ofcfhpst" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_3.png" id="23_hi1no"]
+[ext_resource type="Texture2D" uid="uid://diufvmtryn08p" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_4.png" id="24_l2uus"]
+[ext_resource type="Texture2D" uid="uid://c0wgi5f4j88bv" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_5.png" id="25_jqvvv"]
+[ext_resource type="Texture2D" uid="uid://5ea6m725nvn2" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_6.png" id="26_olo2x"]
+[ext_resource type="Texture2D" uid="uid://cikl5ru268644" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_7.png" id="27_it3hn"]
+[ext_resource type="Texture2D" uid="uid://cmxqqjix47pog" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_8.png" id="28_l76ls"]
+[ext_resource type="Texture2D" uid="uid://dhfx7awx23me5" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_9.png" id="29_yq6bo"]
+[ext_resource type="Texture2D" uid="uid://3gsuk7xbnbcc" path="res://assets/Enemies/lvl_4/Individual Sprite/Death/Bringer-of-Death_Death_10.png" id="30_8fq4c"]
+[ext_resource type="Texture2D" uid="uid://bdj07u30besf3" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_1.png" id="31_46jf6"]
+[ext_resource type="Texture2D" uid="uid://cfgb5j654gpe7" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_2.png" id="32_smw7i"]
+[ext_resource type="Texture2D" uid="uid://col6jy2gq4hpk" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_3.png" id="33_y71cs"]
+[ext_resource type="Texture2D" uid="uid://ddiey6wip1y81" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_4.png" id="34_pxa46"]
+[ext_resource type="Texture2D" uid="uid://vh2p5t1fs77j" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_5.png" id="35_8ncvc"]
+[ext_resource type="Texture2D" uid="uid://ca0f0btyr3x0j" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_6.png" id="36_a14rg"]
+[ext_resource type="Texture2D" uid="uid://cpjly0s1bmerq" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_7.png" id="37_1xdfh"]
+[ext_resource type="Texture2D" uid="uid://bn1mh8wolal42" path="res://assets/Enemies/lvl_4/Individual Sprite/Idle/Bringer-of-Death_Idle_8.png" id="38_vn3yh"]
+[ext_resource type="Texture2D" uid="uid://bduyjhu5njc1s" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_1.png" id="39_g2073"]
+[ext_resource type="Texture2D" uid="uid://byi6ojvuvr31b" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_2.png" id="40_4p04v"]
+[ext_resource type="Texture2D" uid="uid://cgg35l7nc344m" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_3.png" id="41_63ytl"]
+[ext_resource type="Texture2D" uid="uid://pabxbjoo242t" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_4.png" id="42_lapx1"]
+[ext_resource type="Texture2D" uid="uid://b407g2keva0uf" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_5.png" id="43_0bc4i"]
+[ext_resource type="Texture2D" uid="uid://ckttbiu7gavob" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_6.png" id="44_6opbl"]
+[ext_resource type="Texture2D" uid="uid://bn3ealnr36l54" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_7.png" id="45_ux7y7"]
+[ext_resource type="Texture2D" uid="uid://pk1wyytnf4se" path="res://assets/Enemies/lvl_4/Individual Sprite/Walk/Bringer-of-Death_Walk_8.png" id="46_fybfc"]
+[ext_resource type="Texture2D" uid="uid://68y1y8v22g57" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_1.png" id="47_ev2xp"]
+[ext_resource type="Texture2D" uid="uid://1n838t5xoqyo" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_2.png" id="48_ih4cf"]
+[ext_resource type="Texture2D" uid="uid://c2wldyipsxg6g" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_3.png" id="49_t2jjb"]
+[ext_resource type="Texture2D" uid="uid://t4fo03xy1vab" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_4.png" id="50_x44ol"]
+[ext_resource type="Texture2D" uid="uid://0q7nomlenkrw" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_5.png" id="51_if6ij"]
+[ext_resource type="Texture2D" uid="uid://c4og7k6xk8hg2" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_6.png" id="52_0sjy1"]
+[ext_resource type="Texture2D" uid="uid://dxaatyay6d58" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_7.png" id="53_t8d18"]
+[ext_resource type="Texture2D" uid="uid://j1xd02dpuvnm" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_8.png" id="54_3wb7e"]
+[ext_resource type="Texture2D" uid="uid://bwjppcin5w63p" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_9.png" id="55_bk3kl"]
+[ext_resource type="Texture2D" uid="uid://b8grrfln4k4tl" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_10.png" id="56_dbrh2"]
+[ext_resource type="Texture2D" uid="uid://cn0xaifkpw4e8" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_11.png" id="57_2r21u"]
+[ext_resource type="Texture2D" uid="uid://7gkrnm75hvrd" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_12.png" id="58_bkvyb"]
+[ext_resource type="Texture2D" uid="uid://fdqro6hvjt21" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_13.png" id="59_akfad"]
+[ext_resource type="Texture2D" uid="uid://b814plh0piudo" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_14.png" id="60_yub80"]
+[ext_resource type="Texture2D" uid="uid://cksefhctv52ri" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_15.png" id="61_0cfil"]
+[ext_resource type="Texture2D" uid="uid://cbghcvtg03k7m" path="res://assets/Enemies/lvl_4/Individual Sprite/Spell/Bringer-of-Death_Spell_16.png" id="62_ahl4f"]
+[ext_resource type="Texture2D" uid="uid://b2ji7i2m7b5hv" path="res://assets/Enemies/lvl_4/Individual Sprite/Hurt/Bringer-of-Death_Hurt_1.png" id="63_m24kh"]
+[ext_resource type="Texture2D" uid="uid://duglca5mfmcdd" path="res://assets/Enemies/lvl_4/Individual Sprite/Hurt/Bringer-of-Death_Hurt_2.png" id="64_flbyw"]
+[ext_resource type="Texture2D" uid="uid://dt5sutclcb4bv" path="res://assets/Enemies/lvl_4/Individual Sprite/Hurt/Bringer-of-Death_Hurt_3.png" id="65_2tw6f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ft6lg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mjbbh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1dq3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ulcwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qgnrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6f2dw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iu7fp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q6dmc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qgwr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cxyvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_oo3ms")
+}],
+"loop": false,
+"name": &"attack1",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_lpwhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_233l8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_d2bep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wv15o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_h5d7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ufugp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_hxl3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_0nnpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_tyobo")
+}],
+"loop": true,
+"name": &"attack2",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_t15rd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_wn1b3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_hi1no")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_l2uus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jqvvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_olo2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_it3hn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_l76ls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_yq6bo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_8fq4c")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_46jf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_smw7i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_y71cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_pxa46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_8ncvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_a14rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_1xdfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_vn3yh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_g2073")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4p04v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_63ytl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_lapx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_0bc4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_6opbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_ux7y7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_fybfc")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_ev2xp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_ih4cf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_t2jjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_x44ol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_if6ij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_0sjy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_t8d18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_3wb7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_bk3kl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_dbrh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_2r21u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_bkvyb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_akfad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_yub80")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_0cfil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_ahl4f")
+}],
+"loop": false,
+"name": &"spell",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_m24kh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_flbyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_2tw6f")
+}],
+"loop": false,
+"name": &"take_hit",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsl3t"]
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2avx2"]
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5f346"]
+radius = 32.0
+height = 98.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjbbh"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Boss" type="CharacterBody2D" unique_id=421470088]
+script = ExtResource("1_mjbbh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=666727497]
+sprite_frames = SubResource("SpriteFrames_ft6lg")
+animation = &"attack1"
+autoplay = "idle"
+frame = 9
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=29414890]
+position = Vector2(37, 24)
+shape = SubResource("CapsuleShape2D_qsl3t")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=528622619]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=549461537]
+position = Vector2(37, 22)
+shape = SubResource("CapsuleShape2D_2avx2")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=476927492]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=11157231]
+position = Vector2(-8, 10)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_5f346")
+disabled = true
+
+[node name="LedgeCheck" type="RayCast2D" parent="." unique_id=1393936753]
+target_position = Vector2(30, 30)
+
+[node name="LandingCheck" type="RayCast2D" parent="." unique_id=1577355322]
+position = Vector2(120, 0)
+target_position = Vector2(0, 30)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1092829013]
+z_index = 10
+offset_left = -65.0
+offset_top = -51.0
+offset_right = 135.0
+offset_bottom = -41.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mjbbh")
+show_percentage = false

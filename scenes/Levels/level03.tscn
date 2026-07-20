@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dw1wkinrpigl3" path="res://scenes/player.tscn" id="1_mg3gr"]
 [ext_resource type="Texture2D" uid="uid://ckue5b4vujwyh" path="res://assets/Tilemap/2 Background/Tilesetv3.png" id="2_6amya"]
 [ext_resource type="PackedScene" uid="uid://46s0jdca40c8" path="res://scenes/platform.tscn" id="3_xnl7t"]
+[ext_resource type="Script" uid="uid://b4n0y76l6j7av" path="res://scripts/killzone.gd" id="4_xnl7t"]
+[ext_resource type="Script" uid="uid://c7rp37opdj3uc" path="res://scripts/death_screen.gd" id="5_1vqrx"]
+[ext_resource type="PackedScene" uid="uid://v6hu4k0gixbf" path="res://scenes/boss3.tscn" id="6_1vqrx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("2_6amya")
@@ -848,6 +851,30 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c2edg"]
 size = Vector2(58, 584)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6erdn"]
+size = Vector2(3905, 109)
+
+[sub_resource type="LabelSettings" id="LabelSettings_flqfb"]
+font_size = 75
+font_color = Color(0.3666857, 6.858632e-07, 1.6845763e-07, 1)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1hgmt"]
+bg_color = Color(0.6, 0.6, 0.6, 0.19607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vigj2"]
+bg_color = Color(1, 1, 1, 0.19607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
 [node name="Game" type="Node2D" unique_id=395179939]
 
 [node name="Player" parent="." unique_id=522934096 instance=ExtResource("1_mg3gr")]
@@ -893,3 +920,57 @@ position = Vector2(1415, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/StaticBody2D2" unique_id=827389843]
 position = Vector2(1738, 185)
 shape = SubResource("RectangleShape2D_c2edg")
+
+[node name="Killzone" type="Area2D" parent="." unique_id=1612858692]
+script = ExtResource("4_xnl7t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=935932242]
+position = Vector2(1533, 515)
+shape = SubResource("RectangleShape2D_6erdn")
+
+[node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1572456703]
+process_mode = 3
+visible = false
+script = ExtResource("5_1vqrx")
+
+[node name="BackgroundDim" type="ColorRect" parent="DeathScreen" unique_id=1783295909]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6901961)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen" unique_id=920880527]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="DeathScreen/VBoxContainer" unique_id=1462001136]
+layout_mode = 2
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_flqfb")
+
+[node name="RestartButton" type="Button" parent="DeathScreen/VBoxContainer" unique_id=1569054787]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_1hgmt")
+text = "RESTART"
+
+[node name="HomeButton" type="Button" parent="DeathScreen/VBoxContainer" unique_id=1024461554]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_vigj2")
+text = "MAIN MENU"
+
+[node name="Boss" parent="." unique_id=421470088 instance=ExtResource("6_1vqrx")]
+position = Vector2(2410, 221)

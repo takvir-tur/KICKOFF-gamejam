@@ -337,6 +337,9 @@ height = 44.0
 radius = 32.0
 height = 98.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qsl3t"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="Boss" type="CharacterBody2D" unique_id=421470088]
 script = ExtResource("1_2cdgk")
 
@@ -369,3 +372,12 @@ target_position = Vector2(30, 30)
 [node name="LandingCheck" type="RayCast2D" parent="." unique_id=1577355322]
 position = Vector2(120, 0)
 target_position = Vector2(0, 30)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1978488441]
+z_index = 10
+offset_left = -50.0
+offset_top = -66.0
+offset_right = 50.0
+offset_bottom = -56.0
+theme_override_styles/background = SubResource("StyleBoxFlat_qsl3t")
+show_percentage = false

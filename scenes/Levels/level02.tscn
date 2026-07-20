@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b0lgru182mlnn" path="res://scenes/platform_02.tscn" id="3_jeiie"]
 [ext_resource type="Script" uid="uid://b4n0y76l6j7av" path="res://scripts/killzone.gd" id="4_0xa1r"]
 [ext_resource type="Script" uid="uid://c7rp37opdj3uc" path="res://scripts/death_screen.gd" id="5_ld8dl"]
+[ext_resource type="PackedScene" uid="uid://crwj6t074s0xf" path="res://scenes/boss2.tscn" id="6_ld8dl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("2_4s3no")
@@ -1359,3 +1360,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/hover = SubResource("StyleBoxFlat_ififj")
 text = "MAIN MENU"
+
+[node name="Boss" parent="." unique_id=421470088 instance=ExtResource("6_ld8dl")]
+position = Vector2(1390, 225)

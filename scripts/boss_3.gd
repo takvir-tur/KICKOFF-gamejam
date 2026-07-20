@@ -13,6 +13,7 @@ var current_poise: int = max_poise
 @export var jump_velocity: float = -400.0
 @export var attack_range: float = 70.0 # How close they need to be to swing
 @export var attack_cooldown_max: float = 1.5 # Time to wait between attacks
+@export var spell_scene: PackedScene # The spell projectile to instantiate when casting
 
 var attack_cooldown: float = 0.0
 var is_attacking: bool = false
@@ -72,15 +73,15 @@ func _physics_process(delta: float) -> void:
 		# Flip the boss, hitbox, AND BOTH RayCasts to face the player
 		# Flip the boss, hitbox, AND BOTH RayCasts to face the player
 			if direction != 0:
-				sprite.flip_h = direction < 0
-				$Hitbox.scale.x = direction
+				sprite.flip_h = direction > 0
+				$Hitbox.scale.x = -direction
 				
 				# Move the starting positions of the lasers
-				$LedgeCheck.position.x = 20 * direction
-				$LandingCheck.position.x = 120 * direction 
+				$LedgeCheck.position.x = -20 * direction
+				$LandingCheck.position.x = -120 * direction 
 				
 				# --- THE FIX: Flip the angle of the LedgeCheck laser! ---
-				$LedgeCheck.target_position.x = 30 * direction
+				$LedgeCheck.target_position.x = -30 * direction
 
 			# Decide whether to attack or move
 			if distance <= attack_range and attack_cooldown <= 0:
@@ -109,9 +110,7 @@ func _physics_process(delta: float) -> void:
 			
 		# 5. --- ANIMATION UPDATES ---
 		if not is_attacking:
-			if not is_on_floor():
-				sprite.play("jump")
-			elif abs(velocity.x) > 10: 
+			if abs(velocity.x) > 10: 
 				sprite.play("run")
 			else:
 				sprite.play("idle")
@@ -125,11 +124,23 @@ func _start_attack() -> void:
 	is_attacking = true
 	velocity.x = 0 # Commit to the attack, stop moving
 	
-	# Randomly choose between the two attacks
-	var attacks = ["attack1", "attack2"]
+	# Randomly choose between the melee attack and the spell
+	var attacks = ["attack1", "spell"]
 	var chosen_attack = attacks[randi() % attacks.size()]
 	
 	sprite.play(chosen_attack)
+
+
+func cast_spell() -> void:
+	if spell_scene == null:
+		return
+		
+	var spell = spell_scene.instantiate()
+	get_tree().current_scene.add_child(spell)
+	
+	# Position the spell slightly in front of the boss, based on facing direction
+	var facing_direction = $Hitbox.scale.x
+	spell.global_position = global_position + Vector2(40 * facing_direction, 0)
 
 
 func take_damage() -> void:
@@ -183,7 +194,7 @@ func _on_animation_finished() -> void:
 	if sprite.animation == "take_hit":
 		is_hurt = false
 		
-	if sprite.animation == "attack1" or sprite.animation == "attack2":
+	if sprite.animation == "attack1" or sprite.animation == "spell":
 		is_attacking = false
 		attack_cooldown = attack_cooldown_max # Start the cooldown timer
 		hitbox_collision.disabled = true # Ensure blade turns off
@@ -200,17 +211,9 @@ func _on_frame_changed() -> void:
 		elif sprite.frame == 5: # Replace Y with your Turn OFF frame number
 			hitbox_collision.disabled = true
 			
-	elif sprite.animation == "attack2":
-		if sprite.frame == 4: # Replace A with your Turn ON frame number
-			hitbox_collision.disabled = false
-		elif sprite.frame == 5: # Replace B with your Turn OFF frame number
-			hitbox_collision.disabled = true
-			
-	elif sprite.animation == "attack2":
+	elif sprite.animation == "spell":
 		if sprite.frame == 3:
-			hitbox_collision.disabled = false
-		elif sprite.frame == 5:
-			hitbox_collision.disabled = true
+			cast_spell()
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
