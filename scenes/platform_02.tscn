@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b0lgru182mlnn"]
+
+[ext_resource type="Texture2D" uid="uid://ckue5b4vujwyh" path="res://assets/Tilemap/2 Background/Tilesetv3.png" id="1_uoms7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2edg"]
+size = Vector2(48, 11)
+
+[node name="platform02" type="AnimatableBody2D" unique_id=418344289]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=765202092]
+texture = ExtResource("1_uoms7")
+region_enabled = true
+region_rect = Rect2(144, 161, 48, 11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1228481436]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_c2edg")
