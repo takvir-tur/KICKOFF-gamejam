@@ -3,6 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dw1wkinrpigl3" path="res://scenes/player.tscn" id="1_gbk3v"]
 [ext_resource type="Texture2D" uid="uid://ckue5b4vujwyh" path="res://assets/Tilemap/2 Background/Tilesetv3.png" id="2_l8gd6"]
 [ext_resource type="PackedScene" uid="uid://46s0jdca40c8" path="res://scenes/platform.tscn" id="3_ih8w3"]
+[ext_resource type="Script" uid="uid://b4n0y76l6j7av" path="res://scripts/killzone.gd" id="4_ohrb4"]
+[ext_resource type="Script" uid="uid://c7rp37opdj3uc" path="res://scripts/death_screen.gd" id="5_fmckl"]
+[ext_resource type="PackedScene" uid="uid://0sdw1ucgch1q" path="res://scenes/boss.tscn" id="6_d6vvq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("2_l8gd6")
@@ -823,6 +826,30 @@ _data = {
 &"move01": SubResource("Animation_lbhrr")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mu45"]
+size = Vector2(3905, 109)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4tr1"]
+font_size = 75
+font_color = Color(0.3666857, 6.858632e-07, 1.6845763e-07, 1)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgkvr"]
+bg_color = Color(0.6, 0.6, 0.6, 0.19607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6yb1"]
+bg_color = Color(1, 1, 1, 0.19607843)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
 [node name="Game" type="Node2D" unique_id=395179939]
 
 [node name="Player" parent="." unique_id=522934096 instance=ExtResource("1_gbk3v")]
@@ -852,4 +879,59 @@ position = Vector2(1952, 275)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platform01" unique_id=737880345]
 libraries/ = SubResource("AnimationLibrary_iywne")
-autoplay = &"move01"
+
+[node name="Killzone" type="Area2D" parent="." unique_id=1627527589]
+script = ExtResource("4_ohrb4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=1266901633]
+position = Vector2(1533, 515)
+shape = SubResource("RectangleShape2D_7mu45")
+
+[node name="DeathScreen" type="CanvasLayer" parent="." unique_id=1880627634]
+process_mode = 3
+visible = false
+script = ExtResource("5_fmckl")
+
+[node name="BackgroundDim" type="ColorRect" parent="DeathScreen" unique_id=1205312796]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6901961)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen" unique_id=464147197]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="DeathScreen/VBoxContainer" unique_id=59614000]
+layout_mode = 2
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_q4tr1")
+
+[node name="RestartButton" type="Button" parent="DeathScreen/VBoxContainer" unique_id=1705830615]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_bgkvr")
+text = "RESTART"
+
+[node name="HomeButton" type="Button" parent="DeathScreen/VBoxContainer" unique_id=1497706250]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxFlat_l6yb1")
+text = "MAIN MENU"
+
+[node name="Boss" parent="." unique_id=421470088 instance=ExtResource("6_d6vvq")]
+position = Vector2(1608, 247)
+
+[connection signal="boss_defeated" from="Boss" to="Platform01" method="_on_boss_boss_defeated"]
