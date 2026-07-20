@@ -48,6 +48,9 @@ var dash_sfx: AudioStreamPlayer
 var jump_sfx: AudioStreamPlayer
 @onready var sword_collision: CollisionShape2D = $SwordHitbox/CollisionShape2D
 
+# --- ATTACK EFFECTS ---
+var attack_effect: Sprite2D
+
 # UI Signals
 signal kickoff_ready_changed(is_ready: bool)
 signal dashed
@@ -90,6 +93,38 @@ func _ready() -> void:
 	jump_sfx.stream = load("res://assets/Sounds/Walk_run_jump/Stone Jump.wav")
 	jump_sfx.volume_db = -8.0
 	add_child(jump_sfx)
+	
+	attack_effect = Sprite2D.new()
+	add_child(attack_effect)
+	attack_effect.hide()
+	
+	_spawn_tutorial_signs()
+	
+func _spawn_tutorial_signs() -> void:
+	if get_tree().current_scene == null: return
+	var scene_path = get_tree().current_scene.scene_file_path
+	var sign_scene = load("res://scenes/tutorial_sign.tscn")
+	if not sign_scene: return
+	
+	if "level01" in scene_path:
+		var dash_sign = sign_scene.instantiate()
+		dash_sign.action_text = "DASH"
+		dash_sign.key_text = "SHIFT or RT"
+		dash_sign.position = global_position + Vector2(300, -60)
+		get_tree().current_scene.call_deferred("add_child", dash_sign)
+		
+		var atk_sign = sign_scene.instantiate()
+		atk_sign.action_text = "ATTACK"
+		atk_sign.key_text = "J / K or X / Y"
+		atk_sign.position = global_position + Vector2(700, -60)
+		get_tree().current_scene.call_deferred("add_child", atk_sign)
+		
+	elif "level03" in scene_path:
+		var treasure_sign = sign_scene.instantiate()
+		treasure_sign.action_text = "FIND THE"
+		treasure_sign.key_text = "TREASURES!"
+		treasure_sign.position = global_position + Vector2(300, -60)
+		get_tree().current_scene.call_deferred("add_child", treasure_sign)
 	
 	
 func _physics_process(delta: float) -> void:
@@ -278,6 +313,25 @@ func _start_attack(attack_anim: String) -> void:
 	sword_collision.disabled = false
 	if attack_sfx:
 		attack_sfx.play()
+		
+	# Subtle attack animation effect
+	attack_effect.show()
+	attack_effect.modulate.a = 0.8
+	var fx_x_offset = 30 * facing_direction
+	if attack_anim == "slash":
+		attack_effect.texture = load("res://assets/SpecialAttacks/when_j_pressed.png")
+		attack_effect.position = Vector2(fx_x_offset, -15)
+	else:
+		attack_effect.texture = load("res://assets/SpecialAttacks/when_k_pressed.png")
+		attack_effect.position = Vector2(fx_x_offset + 10 * facing_direction, 0)
+	
+	if facing_direction < 0:
+		attack_effect.flip_h = true
+	else:
+		attack_effect.flip_h = false
+		
+	var tw = create_tween()
+	tw.tween_property(attack_effect, "modulate:a", 0.0, 0.25)
 
 func _on_animation_finished() -> void:
 	if sprite.animation == "slash" or sprite.animation == "stab":
@@ -290,4 +344,5 @@ func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 	# If the sword touches an enemy, call their take_damage function
 	if body.is_in_group("enemy"):
 		if body.has_method("take_damage"):
-			body.take_damage()
+			# Increased attack power
+			body.take_damage(2)

@@ -143,13 +143,13 @@ func _start_attack() -> void:
 		attack_sfx.play()
 
 
-func take_damage() -> void:
+func take_damage(damage_amount: int = 2) -> void:
 	# I-frames apply if they are ALREADY stunned or dead
 	if is_dead or is_hurt:
 		return
 		
-	current_hp -= 1
-	current_poise -= 1
+	current_hp -= damage_amount
+	current_poise -= damage_amount
 	
 	$ProgressBar.value = current_hp
 	
