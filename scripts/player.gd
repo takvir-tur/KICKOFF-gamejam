@@ -161,8 +161,10 @@ extends CharacterBody2D
 @export var gravity: float = 1200.0
 
 @export var dash_speed: float = 900.0
-@export var dash_time: float = 0.2
-@export var dash_gravity_scale: float = 0.3  # 0 = perfectly flat dash, 1 = falls like normal
+@export var dash_time: float = 0.6
+@export var dash_gravity_scale: float = .8  # 0 = perfectly flat dash, 1 = falls like normal
+@export var dash_angle: float = 30.0 # 30 to 45 degrees is usually a great sweet spot
+var _active_dash_gravity: float = 1.0
 
 @export var max_jumps: int = 2
 var jumps_left: int = max_jumps
@@ -172,6 +174,10 @@ var current_stamina: float = max_stamina
 @export var stamina_regen_rate: float = 40.0 # How fast it refills per second
 @export var dash_cost: float = 50.0
 @export var jump_cost: float = 25.0
+
+@export var charge_duration: float = 3.0
+var is_charging_kickoff: bool = false
+var charge_timer: float = 0.0
 
 signal stamina_changed(current_value: float, max_value: float)
 
@@ -190,6 +196,10 @@ var _dash_timer: float = 0.0
 #   $Player.kickoff_ready_changed.connect($UI.set_kickoff_ready)
 signal kickoff_ready_changed(is_ready: bool)
 signal dashed
+# Signals for the UI person to connect to the progress bar
+signal kickoff_charge_started()
+signal kickoff_charge_updated(needle_position: float)
+signal kickoff_charge_ended()
 
 
 func _ready() -> void:
@@ -210,11 +220,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_dashing and current_stamina < max_stamina:
-		# move_toward smoothly increases the value without going over the max
 		current_stamina = move_toward(current_stamina, max_stamina, stamina_regen_rate * delta)
 		stamina_changed.emit(current_stamina, max_stamina)
 		
-	if is_dashing:
+	# NEW STATE MACHINE
+	if is_charging_kickoff:
+		_process_charge(delta)
+	elif is_dashing:
 		_process_dash(delta)
 	else:
 		_process_normal_movement(delta)
@@ -246,35 +258,44 @@ func _process_normal_movement(delta: float) -> void:
 		else:
 			print("Not enough stamina to jump!") # Optional debug print
 
+	# Replace your old kickoff_dash check with this:
 	if Input.is_action_just_pressed("kickoff_dash") and has_kickoff:
 		if current_stamina >= dash_cost:
 			current_stamina -= dash_cost
 			stamina_changed.emit(current_stamina, max_stamina)
-			_start_dash()
+			_start_charge()
 		else:
 			print("Not enough stamina to dash!")
-
-
-func _start_dash() -> void:
-	#has_kickoff = false
+			
+# Add the parameter to the function definition
+func _start_dash(accuracy: float) -> void:
+	#has_kickoff = false # UNCOMMENTED: Enforces one dash per level
 	is_dashing = true
 	is_invincible = true
 	_dash_timer = dash_time
-	velocity.x = dash_speed * facing_direction
-	# velocity.y is left as-is on purpose: dashing off a ledge or mid-jump
-	# now carries whatever vertical speed you already had into the burst,
-	# which (combined with the light gravity below) reads as a natural
-	# leap instead of a robotic flat line. On the ground velocity.y is
-	# already ~0, so a grounded dash still looks basically flat.
+	
+	# 1. SCALE POWER: 0.2 (20% power) for bad timing, 1.0 (100% power) for perfect timing
+	var power_multiplier = lerp(0.2, 1.0, accuracy)
+	var launch_power = dash_speed * power_multiplier
+	
+	# 2. SCALE DASH TIME: 0.3 seconds for a bad jump, 1.2 seconds for a perfect jump
+	_dash_timer = lerp(0.3, 1.2, accuracy)
+	
+	# 3. SCALE GRAVITY: 1.5 (heavy rock) for a bad jump, 0.7 (floaty heroic arc) for a perfect jump
+	_active_dash_gravity = lerp(1.5, 0.7, accuracy)
+	
+	# Apply the projectile math
+	var angle_rad = deg_to_rad(dash_angle) # Make sure you added dash_angle to your export variables!
+	velocity.x = launch_power * cos(angle_rad) * facing_direction
+	velocity.y = -launch_power * sin(angle_rad)
+	
 	trail_timer.start()
 	kickoff_ready_changed.emit(has_kickoff)
 	dashed.emit()
-	# Camera2D nodes in the "camera" group react to this - see camera_follow.gd
 	get_tree().call_group("camera", "shake")
 
-
 func _process_dash(delta: float) -> void:
-	velocity.y += gravity * dash_gravity_scale * delta
+	velocity.y += gravity * _active_dash_gravity * delta
 	_dash_timer -= delta
 	if _dash_timer <= 0.0:
 		_end_dash()
@@ -285,6 +306,38 @@ func _end_dash() -> void:
 	is_invincible = false
 	trail_timer.stop()
 
+
+func _start_charge() -> void:
+	is_charging_kickoff = true
+	charge_timer = 0.0
+	velocity.x = 0 # Lock horizontal movement while aiming
+	kickoff_charge_started.emit()
+
+func _process_charge(delta: float) -> void:
+	velocity.y += gravity * delta # Player still falls while charging
+	charge_timer += delta
+
+	# pingpong bounces a value between 0.0 and 1.0. 
+	# Multiplying by 3.0 means the needle moves back and forth quickly.
+	var needle_speed_multiplier = 3.0 
+	var needle_pos = pingpong(charge_timer * needle_speed_multiplier, 1.0)
+	
+	kickoff_charge_updated.emit(needle_pos)
+
+	# Execute if button is released OR 3 seconds have passed
+	if Input.is_action_just_released("kickoff_dash") or charge_timer >= charge_duration:
+		_execute_charged_dash(needle_pos)
+
+func _execute_charged_dash(needle_pos: float) -> void:
+	is_charging_kickoff = false
+	kickoff_charge_ended.emit()
+	
+	# Math to calculate accuracy. Center is 0.5.
+	# 1.0 = perfect dead center, 0.0 = terrible (far edges)
+	var accuracy = 1.0 - (abs(needle_pos - 0.5) * 2.0)
+	
+	# Pass the raw accuracy to the start_dash function
+	_start_dash(accuracy)
 
 func _update_animation() -> void:
 	if is_dashing:
