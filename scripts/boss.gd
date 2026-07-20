@@ -23,6 +23,9 @@ var is_dead: bool = false
 @onready var hitbox_collision: CollisionShape2D = $Hitbox/CollisionShape2D
 var player: Node2D = null
 
+# --- AUDIO ---
+var attack_sfx: AudioStreamPlayer
+
 signal boss_defeated
 
 func _ready() -> void:
@@ -41,6 +44,12 @@ func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.frame_changed.connect(_on_frame_changed)
 	$Hitbox.body_entered.connect(_on_hitbox_body_entered)
+	
+	# --- Create audio player ---
+	attack_sfx = AudioStreamPlayer.new()
+	attack_sfx.stream = load("res://assets/Sounds/Enemy_sound/normal_atk.wav")
+	attack_sfx.volume_db = -5.0
+	add_child(attack_sfx)
 
 
 func _physics_process(delta: float) -> void:
@@ -130,6 +139,8 @@ func _start_attack() -> void:
 	var chosen_attack = attacks[randi() % attacks.size()]
 	
 	sprite.play(chosen_attack)
+	if attack_sfx:
+		attack_sfx.play()
 
 
 func take_damage() -> void:

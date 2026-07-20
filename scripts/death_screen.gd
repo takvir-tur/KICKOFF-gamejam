@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var restart_button = $VBoxContainer/RestartButton
 @onready var home_button = $VBoxContainer/HomeButton
+@onready var background_dim = $BackgroundDim
 
 func _ready() -> void:
 	hide() 
@@ -21,6 +22,11 @@ func _ready() -> void:
 
 func _on_player_died() -> void:
 	show()
+	# Fade in the dim overlay
+	if background_dim:
+		background_dim.modulate.a = 0.0
+		var tween = create_tween()
+		tween.tween_property(background_dim, "modulate:a", 1.0, 0.4)
 	# Optional: Pause the game so enemies/timers stop moving in the background
 	get_tree().paused = true 
 
@@ -30,5 +36,8 @@ func _on_restart_pressed() -> void:
 
 func _on_home_pressed() -> void:
 	get_tree().paused = false
-	# IMPORTANT: Change this path to match your actual Main Menu scene file!
-	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+	if has_node("/root/SceneTransition"):
+		SceneTransition.transition_to("res://scenes/main_menu.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
